@@ -2,7 +2,12 @@
 $LocalDiskdata = @()
 
 #Import Serverlist
-$serverlist = Get-Content -Path "$env:USERPROFILE\Desktop\serverlist.txt"
+$serverlist = Get-Content -Path "$env:USERPROFILE\Desktop\serverlist.txt" -ErrorAction Stop
+
+if ($null -eq $serverlist)
+{
+    throw "serverlist.txt does not have any content. Halting now.."
+}
 
 #Start Looping through each server in the serverlist
 foreach ($server in $serverlist)
